@@ -1,0 +1,5 @@
+<h1>Edit Audio</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.room_audio_path(@conn, :update, @room, @audio)) %>
+
+<span><%= link "Back", to: Routes.room_path(@conn, :show, @room) %></span>

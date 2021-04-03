@@ -1,0 +1,22 @@
+<h1>Show Room</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @room.title %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @room.slug %>
+  </li>
+
+</ul>
+
+<%= for audio <- @room.audios do %>
+  <p><%= audio.name %> | <%= link "Editieren", to: Routes.room_audio_path(@conn, :edit, @room.id, audio.id) %></p>
+<% end %>
+
+<span><%= link "Edit", to: Routes.room_path(@conn, :edit, @room) %></span>
+<span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>
