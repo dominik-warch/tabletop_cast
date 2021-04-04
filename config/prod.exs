@@ -10,8 +10,11 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :tabletop_cast, TabletopCastWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [:inet, port: System.get_env("PORT") || 4000]
+  url: [host: "ttc.dvisca.de", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  code_reloader: false
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -52,4 +55,7 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
+
+config :phoenix, :serve_endpoints, true
+
 import_config "prod.secret.exs"
