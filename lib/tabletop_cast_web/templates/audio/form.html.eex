@@ -5,25 +5,39 @@
     </div>
   <% end %>
 
+<div class="inputset">
   <%= label f, :name %>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
+</div>
 
+<div class="inputset">
   <%= label f, :src %>
   <%= text_input f, :src %>
   <%= error_tag f, :src %>
+</div>
 
+<div class="inputset">
   <%= label f, :volume %>
-  <%= number_input f, :volume, step: "0.01" %>
+  <%= range_input f, :volume, step: "0.01" %>
   <%= error_tag f, :volume %>
+</div>
 
+<div class="inputset">
   <%= label f, :loop %>
   <%= checkbox f, :loop %>
   <%= error_tag f, :loop %>
 
-  <%= file_input f, :audio_file %>
+  <%= label f, :pausable %>
+  <%= checkbox f, :pausable %>
+  <%= error_tag f, :pausable %>
+</div>
 
-  <div>
+<div class="inputset">
+  <%= file_input f, :audio_file %>
+</div>
+
+  <div class="row">
     <%= submit "Save" %>
   </div>
 <% end %>
