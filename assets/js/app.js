@@ -34,6 +34,14 @@ Hooks.AudioControl = {
     }
 }
 
+Hooks.SetVolume = {
+    mounted() {
+        let volume = document.getElementById(`volume-audio-${this.el.id}`).value
+        let audio = document.getElementById(`audio-${this.el.id}`)
+        audio.volume = volume
+    }
+}
+
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
 // Show progress bar on live navigation and form submits

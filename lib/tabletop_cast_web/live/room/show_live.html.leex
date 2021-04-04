@@ -61,7 +61,7 @@
           <%= for audio <- @room.audios do %>
 
         	<!-- FIELD -->
-            <div id="<%= audio.num %>" class="field stop">
+            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop">
 
             	<!-- Audio-Tag: is always hidden! -->
             	<audio id='audio-<%= audio.num %>' <%= if audio.loop do %>loop<% end %> controls src='<%= audio.src %>' volume='<%= audio.volume %>'
