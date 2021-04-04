@@ -23,6 +23,7 @@ html, body {
 }
 
 #site {
+	max-width: 720px;
 	width: 100%;
 	margin: 0px auto;
 	padding: 20px;	
@@ -167,7 +168,10 @@ audio {
 	border-radius: 3px;
 	text-align: center;
 	color: white;
-	padding-top: 0px;	
+	padding-top: 0px;
+	border: 0px;
+	text-decoration: none;
+	cursor: pointer;	
 }
 
 
@@ -320,3 +324,195 @@ input[type=range]::-moz-range-thumb {
 #preloadSVG {
 	display: none;	
 }
+
+/* -- BACKEND --*/
+
+#roomlist {
+	padding: 10px 0px 0px 10px;
+	margin: 0px auto;
+	width: 100%;
+}
+
+.column {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;	
+}
+
+.room {
+	display: flex;
+	width: 100%;	
+	
+}
+
+.roomtitle, .roomlink  {
+	background-color: rgba(0,0,0,0.25);
+	border-radius: 3px;
+	text-align: center;
+	color: white;
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0px 5px 10px 5px;
+	padding: 0px 10px;	
+}
+
+.roomtitle {
+	flex-grow: 1;
+}
+
+.rbutton {
+	display: block;
+	position: relative;
+	min-width: 60px;
+	height: 35px;
+	background-color: rgba(0,0,0,0.25);
+	border-radius: 3px;
+	text-align: center;
+	color: white;
+	padding: 0px 10px;
+	margin: 0px 5px 10px 5px;
+	line-height: 35px;
+	border: 0px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.rbutton:hover {
+	background-color: rgba(255,255,255,0.15);
+}
+
+.roomlink {
+	
+}
+
+.roomcontrol {
+	display: flex;
+	flex-flow: row nowrap;
+	color: white;
+	height: 35px;
+	line-height: 35px;
+	margin: 0px;
+	
+}
+
+.roomshow {
+	
+}
+
+.roomedit {
+	
+}
+
+.roomdelete {
+	
+}
+
+.ricon{
+  width: 23px;
+  height: 35px;
+  stroke: rgba(255,255,255,1);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  margin-bottom: -12px;
+}
+
+/* ROOM DETAIL */
+
+#soundlist {
+	padding: 10px 0px 0px 10px;
+	margin: 0px auto;
+	width: 100%;
+}
+
+.sound {
+	display: flex;
+	width: 100%;	
+	
+}
+
+.soundtitle {
+	background-color: rgba(0,0,0,0.25);
+	border-radius: 3px;
+	text-align: center;
+	color: white;
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0px 5px 10px 5px;
+	padding: 0px 10px;	
+	flex-grow: 1;
+}
+
+/* AUDIO-FORM */
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.inputset {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.inputset label {
+	background-color: rgba(0,0,0,0.25);
+	border-radius: 3px;
+	text-align: center;
+	color: white;
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0px 5px 10px 5px;
+	padding: 0px 10px;
+	flex-grow: 1;	
+}
+
+.inputset input {
+	background-color: rgba(0,0,0,0.15);
+	border-radius: 3px;
+	text-align: center;
+	color: white;
+	width: 150px;
+	height: 35px;
+	line-height: 35px;
+	border: 0px;
+	margin: 0px 5px 10px 5px;
+	padding: 0px 10px;
+	flex-grow: 3;		
+}
+
+.inputset input:hover,.inputset input:active,.inputset input:focus {
+	background-color: rgba(0,0,0,0.25);	
+}
+
+.inputset input[type=checkbox]  {
+    flex-grow: 0;
+    width: 33px;
+}
+
+.alert {
+	border-radius: 3px;
+	text-align: center;
+	color: rgba(255,255,255,1);
+	width: auto;
+	height: 50px;
+	line-height: 50px;
+	margin: 0px 5px 10px 5px;
+	padding: 0px 10px;
+	flex-grow: 1;		
+}
+
+.alert-info {
+	background-color: rgba(0,255,255,0.25);	
+}
+
+.alert-danger {
+	background-color: rgba(255,0,0,0.25);	
+}
+
