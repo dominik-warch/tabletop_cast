@@ -58,7 +58,7 @@
             <div id="audio-<%= audio.num %>-field" class="field stop">
 
             	<!-- Audio-Tag: is always hidden! -->
-            	<audio id='audio-<%= audio.num %>' controls src='<%= audio.src %>' onended="this.parentElement.classList.remove('play');this.parentElement.classList.add('stop');"></audio>
+            	<audio id='audio-<%= audio.num %>' <%= if audio.loop do %>loop<% end %> controls src='<%= audio.src %>' onended="this.parentElement.classList.remove('play');this.parentElement.classList.add('stop');"></audio>
 
                 <!-- /Audio-Tag -->
 

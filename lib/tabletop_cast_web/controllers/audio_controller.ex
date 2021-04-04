@@ -33,7 +33,6 @@ defmodule TabletopCastWeb.AudioController do
         audio_params
       end
 
-    IO.inspect(audio_params)
     case Rooms.update_audio(audio, audio_params) do
       {:ok, _audio} ->
         conn

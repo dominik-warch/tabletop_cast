@@ -14,7 +14,7 @@
   <%= error_tag f, :src %>
 
   <%= label f, :volume %>
-  <%= number_input f, :volume %>
+  <%= number_input f, :volume, step: "0.01" %>
   <%= error_tag f, :volume %>
 
   <%= label f, :loop %>

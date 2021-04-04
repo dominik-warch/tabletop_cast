@@ -66,7 +66,7 @@ defmodule TabletopCastWeb.RoomController do
     case Rooms.update_room(room, room_params) do
       {:ok, room} ->
         conn
-        |> put_flash(:info, "Room updated successfully.")
+        |> put_flash(:info, "Raum erfolgreich aktualisiert.")
         |> redirect(to: Routes.room_path(conn, :show, room))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -80,7 +80,7 @@ defmodule TabletopCastWeb.RoomController do
     File.rm_rf("/home/deploy/media/#{room.slug}")
 
     conn
-    |> put_flash(:info, "Room deleted successfully.")
+    |> put_flash(:info, "Raum erfolgreich gelöscht.")
     |> redirect(to: Routes.room_path(conn, :index))
   end
 end
