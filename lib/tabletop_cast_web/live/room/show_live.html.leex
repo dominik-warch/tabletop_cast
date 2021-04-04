@@ -1,47 +1,53 @@
 
 
-<div id ="site">
+<div id ="site" class="gm">
 
 	<!-- header -->
 
     <div id="header">
     	<h1>TabletopCast</h1>
-    	<h2><%= @room.title %></h2> <!-- Show Room ID instead of "Room Title" -->
+    	<h2><%= @room.title %></h2> <!-- Show Room ID -->
     </div>
 
     <!-- Usercount -->
 
     <div id="usercount">
     	<div class="button user">Nutzer:</div>
-        <div class="button usernumber"><%= Enum.count(@connected_users) %></div> <!-- replace num,ber with variable -->
+        <div class="button usernumber"><%= Enum.count(@connected_users) %></div> <!-- shows number of live users -->
     </div>
 
     <!-- Main Controls -->
 
     <div id="main-controls">
         <div class="row">
-        	<!-- BUTTON: Stop all -->
+        	<!-- BUTTON: Stop all --
             <a class="button stop" href="#">
                 <svg class="icon"><use xlink:href="#pause"/></svg>
             </a>
 
-            <!-- BUTTON: Mute all -->
+            <!-- BUTTON: Mute all --
             <a class="button unmute" href="#">
                 <svg class="icon"><use xlink:href="#volume-x"/></svg>
             </a>
 
-            <!-- BUTTON: Unmute all -->
+            <!-- BUTTON: Unmute all --
             <a class="button mute" href="#">
                 <svg class="icon"><use xlink:href="#volume-2"/></svg>
             </a>
 
+			<!-- BUTTON: GM -->
+            <a class="button stop" href="#" onclick="document.getElementById('site').classList.toggle('gm')">
+                <svg class="icon"><use xlink:href="#edit"/></svg>
+            </a>
+
             <!-- FIELD: Switch to Room ID -->
             <div class="jumptoroom">
-            	<input type="text" id="jumptoroom" class="jumptoroom" name="jumptoroom" value="Go to: Room Title" />
-            	<a class="button jumptoroom" href="#">
+            	<input type="text" id="jumptoroom" class="jumptoroom" name="jumptoroom" value="<%= @room.title %>" />
+            	<a class="button jumptoroom" href="#" onclick="parent.location = getElementById('jumptoroom').value +'.html' ">
                 	<svg class="icon"><use xlink:href="#skip-forward"/></svg>
             	</a>
             </div>
+
         </div>
     </div>
 
@@ -55,10 +61,11 @@
           <%= for audio <- @room.audios do %>
 
         	<!-- FIELD -->
-            <div id="audio-<%= audio.num %>-field" class="field stop">
+            <div id="audio-<%= audio.num %>-field <%= audio.num %>" class="field stop">
 
             	<!-- Audio-Tag: is always hidden! -->
-            	<audio id='audio-<%= audio.num %>' <%= if audio.loop do %>loop<% end %> controls src='<%= audio.src %>' onended="this.parentElement.classList.remove('play');this.parentElement.classList.add('stop');"></audio>
+            	<audio id='audio-<%= audio.num %>' <%= if audio.loop do %>loop<% end %> controls src='<%= audio.src %>'
+                onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');"></audio>
 
                 <!-- /Audio-Tag -->
 
@@ -67,11 +74,27 @@
 
                 	<!-- BUTTON: Play/Pause - Depends on class "stop" and "play" in FIELD -->
                     <div id="audio-<%= audio.num %>-playpause" class="playpause">
-                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="AudioControl" onClick="this.parentElement.parentElement.parentElement.classList.add('play');this.parentElement.parentElement.parentElement.classList.remove('stop');this.parentElement.parentElement.parentElement.firstElementChild.play();">
+                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="AudioControl"
+                        onClick="
+                        getElementById('-<%= audio.num %>').classList.add('play');
+                        getElementById('<%= audio.num %>').classList.remove('stop');
+                        getElementById('audio-<%= audio.num %>').play();">
                         	<svg class="icon"><use xlink:href="#play"/></svg>
                         </a>
-                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button pause" href="#" phx-hook="AudioControl" onClick="this.parentElement.parentElement.parentElement.classList.add('stop');this.parentElement.parentElement.parentElement.classList.remove('play');this.parentElement.parentElement.parentElement.firstElementChild.pause();this.parentElement.parentElement.parentElement.firstElementChild.currentTime=0;">
-                        	<svg class="icon"><use xlink:href="#wind"/></svg>
+                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="AudioControl"
+                        onClick="
+                        getElementById('-<%= audio.num %>').classList.add('stop');
+                        getElementById('-<%= audio.num %>').classList.remove('play');
+                        getElementById('audio-<%= audio.num %>').pause();
+                        getElementById('audio-<%= audio.num %>').currentTime=0;">
+                        	<svg class="icon"><use xlink:href="#x-square"/></svg>
+                        </a>
+                        <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="AudioControl"
+                        onClick="
+                        getElementById('-<%= audio.num %>').classList.add('stop');
+                        getElementById('-<%= audio.num %>').classList.remove('play');
+                        getElementById('audio-<%= audio.num %>').pause();">
+                        	<svg class="icon"><use xlink:href="#pause"/></svg>
                         </a>
                     </div>
                     <div class="titlevolume">

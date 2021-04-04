@@ -67,6 +67,10 @@ border-bottom: 1px solid rgba(255,255,255,1);
 	width: 100%;
 }
 
+.gm #soundpad {
+	display: none;	
+}
+
 #main-controls {
 	width: 100%;
 	padding-top: 10px;
@@ -171,12 +175,16 @@ a.button:hover {
 	background-color: rgba(255,255,255,0.15);			
 }
 
-div.play a.pause, div.stop a.play {
-	display: block;
+div.playpause a.button {
+	display: none;	
 }
 
-div.play a.play, div.stop a.pause {
-		display: none;
+div.play a.stop, div.stop a.play, div.play.pausable a.pause, div.stop.pausable a.stop {
+	display: block;	
+}
+
+div.pausable a.stop {
+	display: none;	
 }
 
 .title {
