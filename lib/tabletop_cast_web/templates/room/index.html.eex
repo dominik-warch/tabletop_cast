@@ -18,7 +18,9 @@
          	<%= room.title %>
         </div>
         <div class="roomlink">
-         	<%= link "LINK", to: Routes.show_path(@conn, :show, room.slug) %>
+         	<%= link to: Routes.show_path(@conn, :show, room.slug) do %>
+            <%= room.slug %>
+          <% end %>
         </div>
 
         <div class="roomcontrol">
