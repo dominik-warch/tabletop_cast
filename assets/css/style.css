@@ -436,7 +436,8 @@ input[type=range]::-moz-range-thumb {
 
 .sound {
 	display: flex;
-	width: 100%;	
+	width: 33%;
+	flex-grow: 1;	
 	
 }
 

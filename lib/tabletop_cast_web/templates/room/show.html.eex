@@ -13,7 +13,7 @@
 
  	<!-- RoomList -->
   <div id="soundlist">
-    <div class="column">
+    <div class="row">
 
     <%= for audio <- @room.audios do %>
      	<!-- SOUND -->
