@@ -23,18 +23,17 @@ defmodule TabletopCastWeb.AudioController do
   def update(conn, %{"id" => id, "room_id" => room_id, "audio" => audio_params}) do
     room = Rooms.get_room!(room_id)
     audio = Rooms.get_audio!(id)
-    IO.inspect(audio_params)
 
     if upload = audio_params["audio_file"] do
       file_extension = Path.extname(upload.filename)
       File.cp(upload.path, "/home/deploy/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
-      Map.put(audio_params, :src, "http://ttc.dvisca.de/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
+      audio_params = Map.put(audio_params, "src", "http://ttc.dvisca.de/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
     end
 
     case Rooms.update_audio(audio, audio_params) do
       {:ok, _audio} ->
         conn
-        |> put_flash(:info, "Audio updated successfully.")
+        |> put_flash(:info, "Audiofeld erfolgreich aktualisiert.")
         |> redirect(to: Routes.room_path(conn, :show, room))
 
       {:error, %Ecto.Changeset{} = changeset} ->

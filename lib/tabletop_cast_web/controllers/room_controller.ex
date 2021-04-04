@@ -77,7 +77,7 @@ defmodule TabletopCastWeb.RoomController do
   def delete(conn, %{"id" => id}) do
     room = Rooms.get_room!(id)
     {:ok, _room} = Rooms.delete_room(room)
-    File.rm_rf("var/www/html/media/#{room.slug}")
+    File.rm_rf("/home/deploy/media/#{room.slug}")
 
     conn
     |> put_flash(:info, "Room deleted successfully.")
