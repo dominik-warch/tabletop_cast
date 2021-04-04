@@ -2,7 +2,6 @@ defmodule TabletopCastWeb.AudioController do
   use TabletopCastWeb, :controller
 
   alias TabletopCast.Rooms
-  alias TabletopCast.Rooms.Audio
 
   def index(conn, _params) do
     audios = Rooms.list_audios()
@@ -24,6 +23,12 @@ defmodule TabletopCastWeb.AudioController do
   def update(conn, %{"id" => id, "room_id" => room_id, "audio" => audio_params}) do
     room = Rooms.get_room!(room_id)
     audio = Rooms.get_audio!(id)
+    IO.inspect(audio_params)
+
+    if upload = audio_params["audio_file"] do
+      file_extension = Path.extname(upload.filename)
+      File.cp(upload.path, "/var/www/html/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
+    end
 
     case Rooms.update_audio(audio, audio_params) do
       {:ok, _audio} ->

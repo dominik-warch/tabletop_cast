@@ -38,6 +38,7 @@ defmodule TabletopCastWeb.RoomController do
         Rooms.create_audio(%{room_id: room.id, num: 19})
         Rooms.create_audio(%{room_id: room.id, num: 20})
         Rooms.create_audio(%{room_id: room.id, num: 21})
+        File.mkdir("/var/www/html/media/#{room.slug}")
 
         conn
         |> put_flash(:info, "Raum erfolgreich angelegt.")
@@ -76,6 +77,7 @@ defmodule TabletopCastWeb.RoomController do
   def delete(conn, %{"id" => id}) do
     room = Rooms.get_room!(id)
     {:ok, _room} = Rooms.delete_room(room)
+    File.rm_rf("var/www/html/media/#{room.slug}")
 
     conn
     |> put_flash(:info, "Room deleted successfully.")
