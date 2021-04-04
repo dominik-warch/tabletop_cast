@@ -5,18 +5,18 @@ defmodule TabletopCastWeb.Room.ShowLive do
 
   use TabletopCastWeb, :live_view
 
-#  alias TabletopCast.ConnectedUser
-#  alias TabletopCastWeb.Presence
+  alias TabletopCast.ConnectedUser
+  alias TabletopCastWeb.Presence
   alias TabletopCast.Rooms
-  #alias Phoenix.Socket.Broadcast
+  alias Phoenix.Socket.Broadcast
 
 
   # Datenbank derzeit deaktiviert, d.h. keine Möglichkeit zum Speichern von Räumen oder Audiofeldern. Erstmal einfacher zu entwickeln.
   @impl true
   def mount(%{"slug" => slug}, _session, socket) do
-  #  user = create_connected_user()
+    user = create_connected_user()
     Phoenix.PubSub.subscribe(TabletopCast.PubSub, "room:" <> slug)
-  #  {:ok, _} = Presence.track(self(), "room:" <> slug, user.uuid, %{})
+    {:ok, _} = Presence.track(self(), "room:" <> slug, user.uuid, %{})
 
     case Rooms.get_room_with_audios_via_slug(slug) do
       nil ->
@@ -29,8 +29,7 @@ defmodule TabletopCastWeb.Room.ShowLive do
         {:ok,
           socket
           |> assign(:room, room)
-          |> IO.inspect()
-     #     |> assign(:user, user)
+          |> assign(:user, user)
           |> assign(:slug, slug)
           |> assign(:connected_users, [])
         }
@@ -38,12 +37,12 @@ defmodule TabletopCastWeb.Room.ShowLive do
   end
 
   @impl true
-#  def handle_info(%Broadcast{event: "presence_diff"}, socket) do
-#    {:noreply,
-#      socket
-#      |> assign(:connected_users, list_present(socket))
-#    }
-#  end
+  def handle_info(%Broadcast{event: "presence_diff"}, socket) do
+    {:noreply,
+      socket
+      |> assign(:connected_users, list_present(socket))
+    }
+  end
 
   def handle_info({:audio_played, message}, socket) do
     {:noreply, push_event(socket, "play_audio", %{audio_id: message})}
@@ -69,12 +68,12 @@ defmodule TabletopCastWeb.Room.ShowLive do
     {:noreply, push_event(socket, "stop_audio", %{audio_id: audio_id})}
   end
 
-#  defp list_present(socket) do
-#    Presence.list("room:" <> socket.assigns.slug)
-#    |> Enum.map(fn {k, _} -> k end)
-#  end
+  defp list_present(socket) do
+    Presence.list("room:" <> socket.assigns.slug)
+    |> Enum.map(fn {k, _} -> k end)
+  end
 
-#  defp create_connected_user do
-#    %ConnectedUser{uuid: UUID.uuid4()}
-#  end
+  defp create_connected_user do
+    %ConnectedUser{uuid: UUID.uuid4()}
+  end
 end

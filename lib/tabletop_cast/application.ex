@@ -13,6 +13,8 @@ defmodule TabletopCast.Application do
       TabletopCastWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: TabletopCast.PubSub},
+      # Start the Presence module
+      TabletopCastWeb.Presence,
       # Start the Endpoint (http/https)
       TabletopCastWeb.Endpoint
       # Start a worker by calling: TabletopCast.Worker.start_link(arg)
