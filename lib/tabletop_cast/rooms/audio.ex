@@ -6,9 +6,10 @@ defmodule TabletopCast.Rooms.Audio do
 
   schema "audios" do
     field :loop, :boolean, default: false
-    field :name, :string, default: ""
+    field :name, :string
     field :src, :string
-    field :volume, :integer
+    field :volume, :float, default: 1.0
+    field :num, :integer
     belongs_to(:room, Room)
 
     timestamps()
@@ -17,8 +18,8 @@ defmodule TabletopCast.Rooms.Audio do
   @doc false
   def changeset(audio, attrs) do
     audio
-    |> cast(attrs, [:name, :src, :volume, :loop, :room_id])
-    |> validate_required([:room_id])
+    |> cast(attrs, [:name, :src, :volume, :loop, :room_id, :num])
+    |> validate_required([:room_id, :num])
     |> assoc_constraint(:room)
   end
 end

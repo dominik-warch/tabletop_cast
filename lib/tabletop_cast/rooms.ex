@@ -40,13 +40,13 @@ defmodule TabletopCast.Rooms do
 
   def get_room_with_audios_via_slug(slug) when is_binary(slug) do
     get_room(slug)
-    |> Repo.preload(:audios)
+    |> Repo.preload([audios: (from a in Audio, order_by: a.id)])
   end
 
   def get_room_with_audios(id) do
     id
     |> get_room!()
-    |> Repo.preload(:audios)
+    |> Repo.preload([audios: (from a in Audio, order_by: a.id)])
   end
 
   def get_room(slug) when is_binary(slug) do
