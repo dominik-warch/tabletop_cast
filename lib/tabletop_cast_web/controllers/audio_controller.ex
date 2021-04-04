@@ -27,7 +27,7 @@ defmodule TabletopCastWeb.AudioController do
 
     if upload = audio_params["audio_file"] do
       file_extension = Path.extname(upload.filename)
-      File.cp(upload.path, "/var/www/html/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
+      File.cp(upload.path, "/home/deploy/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
     end
 
     case Rooms.update_audio(audio, audio_params) do
