@@ -24,12 +24,16 @@ defmodule TabletopCastWeb.AudioController do
     room = Rooms.get_room!(room_id)
     audio = Rooms.get_audio!(id)
 
-    if upload = audio_params["audio_file"] do
-      file_extension = Path.extname(upload.filename)
-      File.cp(upload.path, "/home/deploy/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
-      audio_params = Map.put(audio_params, "src", "http://ttc.dvisca.de/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
-    end
+    audio_params =
+      if upload = audio_params["audio_file"] do
+        file_extension = Path.extname(upload.filename)
+        File.cp(upload.path, "/home/deploy/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
+        Map.put(audio_params, "src", "http://ttc.dvisca.de/media/#{room.slug}/audio-#{audio.num}#{file_extension}")
+      else
+        audio_params
+      end
 
+    IO.inspect(audio_params)
     case Rooms.update_audio(audio, audio_params) do
       {:ok, _audio} ->
         conn
