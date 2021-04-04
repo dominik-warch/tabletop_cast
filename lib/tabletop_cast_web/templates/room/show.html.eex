@@ -17,7 +17,7 @@
 
     <%= for audio <- @room.audios do %>
      	<!-- SOUND -->
-      <div id="sound-ID" class="sound">
+      <div id="sound-<%= audio.id %>" class="sound">
        	<div class="soundtitle">
          	<%= audio.name %>
         </div>
