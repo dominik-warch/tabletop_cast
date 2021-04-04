@@ -29,7 +29,7 @@ environment :dev do
   # It is recommended that you build with MIX_ENV=prod and pass
   # the --env flag to Distillery explicitly if you want to use
   # dev mode.
-  set dev_mode: true
+  set dev_mode: false
   set include_erts: false
   set cookie: :"BuGas]|AZgq<nC{qKDsY|Lx{VvLhUCj<iR%wFZb;k7mEM3p{Rel)qv918]3e;g|="
 end
@@ -52,4 +52,3 @@ release :tabletop_cast do
     :runtime_tools
   ]
 end
-
