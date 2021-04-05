@@ -8,7 +8,7 @@
       <%= link to: Routes.show_path(@conn, :show, @room.slug) do %>
         <%= @room.slug %>
       <% end %>
-    </h2> <!-- Show Room ID instead of "Room Title" -->
+    </h2>
   </div>
 
  	<!-- RoomList -->

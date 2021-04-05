@@ -3,7 +3,7 @@
 	<!-- header -->
   <div id="header">
   	<h1>TabletopCast</h1>
-   	<h2>Raum-Übersicht</h2> <!-- Show Room ID instead of "Room Title" -->
+   	<h2>Raum-Übersicht</h2>
   </div>
 
  	<!-- RoomList -->

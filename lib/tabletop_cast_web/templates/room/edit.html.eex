@@ -1,5 +1,10 @@
-<h1>Edit Room</h1>
+<div id ="site">
 
-<%= render "form.html", Map.put(assigns, :action, Routes.room_path(@conn, :update, @room)) %>
+	<!-- header -->
+  <div id="header">
+  	<h1>TabletopCast</h1>
+   	<h2><%= @room.title %></h2>
+  </div>
 
-<span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>
+  <%= render "form.html", Map.put(assigns, :action, Routes.room_path(@conn, :update, @room)) %>
+</div>

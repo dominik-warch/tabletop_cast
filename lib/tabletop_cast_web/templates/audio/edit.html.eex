@@ -1,5 +1,10 @@
-<h1>Edit Audio</h1>
+<div id ="site">
 
-<%= render "form.html", Map.put(assigns, :action, Routes.room_audio_path(@conn, :update, @room, @audio)) %>
+	<!-- header -->
+  <div id="header">
+  	<h1>TabletopCast</h1>
+   	<h2><%= @room.title %> - <%= @audio.name %></h2> <!-- Show Room ID instead of "Room Title" -->
+  </div>
 
-<span><%= link "Back", to: Routes.room_path(@conn, :show, @room) %></span>
+  <%= render "form.html", Map.put(assigns, :action, Routes.room_audio_path(@conn, :update, @room, @audio)) %>
+</div>
