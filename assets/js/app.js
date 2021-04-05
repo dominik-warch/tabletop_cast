@@ -24,15 +24,24 @@ Hooks.AudioControl = {
     mounted() {
         this.handleEvent("play_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
+            let audio_num = payload.audio_id.slice(6)
+            document.getElementById(audio_num).classList.add('play')
+            document.getElementById(audio_num).classList.remove('stop')
             audio.play()
         })
         this.handleEvent("stop_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
+            let audio_num = payload.audio_id.slice(6)
+            document.getElementById(audio_num).classList.add('stop');
+            document.getElementById(audio_num).classList.remove('play');
             audio.pause()
             audio.currentTime = 0
         })
         this.handleEvent("pause_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
+            let audio_num = payload.audio_id.slice(6)
+            document.getElementById(audio_num).classList.add('stop');
+            document.getElementById(audio_num).classList.remove('play');
             audio.pause() 
         })
         this.handleEvent("change_volume", (payload) => {
