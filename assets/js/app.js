@@ -31,6 +31,10 @@ Hooks.AudioControl = {
             audio.pause()
             audio.currentTime = 0
         })
+        this.handleEvent("pause_audio", (payload) => {
+            let audio = document.getElementById(payload.audio_id)
+            audio.pause() 
+        })
     }
 }
 

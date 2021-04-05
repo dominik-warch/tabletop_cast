@@ -10,8 +10,6 @@ defmodule TabletopCastWeb.Room.ShowLive do
   alias TabletopCast.Rooms
   alias Phoenix.Socket.Broadcast
 
-
-  # Datenbank derzeit deaktiviert, d.h. keine Möglichkeit zum Speichern von Räumen oder Audiofeldern. Erstmal einfacher zu entwickeln.
   @impl true
   def mount(%{"slug" => slug}, _session, socket) do
     user = create_connected_user()
@@ -52,11 +50,14 @@ defmodule TabletopCastWeb.Room.ShowLive do
     {:noreply, push_event(socket, "stop_audio", %{audio_id: message})}
   end
 
+  def handle_info({:audio_paused, message}, socket) do
+    {:noreply, push_event(socket, "pause_audio", %{audio_id: message})}
+  end
+
   @impl true
   def handle_event("PlayAudio", %{"id" => id}, socket) do
     audio_id = String.slice(id, 5..-1)
     message = {:audio_played, audio_id}
-    IO.inspect(message)
     Phoenix.PubSub.broadcast(TabletopCast.PubSub, "room:" <> socket.assigns.slug, message)
     {:noreply, push_event(socket, "play_audio", %{audio_id: audio_id})}
   end
@@ -66,6 +67,13 @@ defmodule TabletopCastWeb.Room.ShowLive do
     message = {:audio_stopped, audio_id}
     Phoenix.PubSub.broadcast(TabletopCast.PubSub, "room:" <> socket.assigns.slug, message)
     {:noreply, push_event(socket, "stop_audio", %{audio_id: audio_id})}
+  end
+
+  def handle_event("PauseAudio", %{"id" => id}, socket) do
+    audio_id = String.slice(id, 6..-1)
+    message = {:audio_paused, audio_id}
+    Phoenix.PubSub.broadcast(TabletopCast.PubSub, "room:" <> socket.assigns.slug, message)
+    {:noreply, push_event(socket, "pause_audio", %{audio_id: audio_id})}
   end
 
   defp list_present(socket) do
