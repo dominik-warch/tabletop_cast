@@ -54,6 +54,11 @@ defmodule TabletopCastWeb.Room.ShowLive do
     {:noreply, push_event(socket, "pause_audio", %{audio_id: message})}
   end
 
+  def handle_info({:volume_changed, audio_id, volume}, socket) do
+    {volume, _} = Float.parse(volume)
+    {:noreply, push_event(socket, "change_volume", %{audio_id: audio_id, volume: volume})}
+  end
+
   @impl true
   def handle_event("PlayAudio", %{"id" => id}, socket) do
     audio_id = String.slice(id, 5..-1)
@@ -74,6 +79,13 @@ defmodule TabletopCastWeb.Room.ShowLive do
     message = {:audio_paused, audio_id}
     Phoenix.PubSub.broadcast(TabletopCast.PubSub, "room:" <> socket.assigns.slug, message)
     {:noreply, push_event(socket, "pause_audio", %{audio_id: audio_id})}
+  end
+
+  def handle_event("ChangeVolume", %{"_target" => [id|_]} = params, socket) do
+    volume = params[id]
+    message = {:volume_changed, id, volume}
+    Phoenix.PubSub.broadcast(TabletopCast.PubSub, "room:" <> socket.assigns.slug, message)
+    {:noreply, push_event(socket, "change_volume", %{})}
   end
 
   defp list_present(socket) do

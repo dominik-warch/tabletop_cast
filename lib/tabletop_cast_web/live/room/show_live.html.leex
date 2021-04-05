@@ -64,10 +64,13 @@
             <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %>">
 
             	<!-- Audio-Tag: is always hidden! -->
-            	<audio id='audio-<%= audio.num %>' <%= if audio.loop do %>loop<% end %> controls src='<%= audio.src %>' volume='<%= audio.volume %>'
-                onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');"></audio>
-
-                <!-- /Audio-Tag -->
+            	<audio
+                    id='audio-<%= audio.num %>'
+                    <%= if audio.loop do %>loop<% end %>
+                    controls
+                    src='<%= audio.src %>'
+                    onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
+                </audio>
 
                 <!-- Audio Controls -->
                 <div id="audio-<%= audio.num %>-controls" class="controls">
@@ -98,17 +101,34 @@
                         </a>
                     </div>
                     <div class="titlevolume">
+
                         <!-- INPUT: Title - To name Sound -->
-                        <!--<input type="text" id="title-audio-<%= audio.num %>" class="title" name="title" value=<%= audio.name %> />--> <!-- needs to be saved with room -->
                         <span class="title"><%= audio.name %></span>
 
                         <div class="volumeloop">
                             <!-- INPUT: Volume -->
-                            <input type="range" id="volume-audio-<%= audio.num %>" class="volume" name="volume" value='<%= audio.volume %>' min="0" max="1" step="0.01" onchange="this.parentElement.parentElement.parentElement.parentElement.firstElementChild.volume=this.value"/> <!-- styled via css, only works in chromium -->
+                            <form phx-change="ChangeVolume">
+                            <input type="range"
+                                id="volume-audio-<%= audio.num %>"
+                                class="volume"
+                                name="<%= audio.num %>"
+                                value='<%= audio.volume %>'
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                onchange="this.parentElement.parentElement.parentElement.parentElement.firstElementChild.volume=this.value"
+                            />
+                            </form>
 
                             <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
                             <div class="loopbox">
-                                <input type="checkbox" id="loop-audio-<%= audio.num %>" class="loop" name="loop" onchange="if(this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop){this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=false;}else{this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=true;}" /> <!-- Checkbox is hidden -->
+                                <input type="checkbox"
+                                    id="loop-audio-<%= audio.num %>"
+                                    class="loop"
+                                    name="loop"
+                                    onchange="if(this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop){this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=false;}else{this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=true;}"
+                                />
+                                    <!-- Checkbox is hidden -->
 
                                 <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
                             </div>

@@ -35,6 +35,12 @@ Hooks.AudioControl = {
             let audio = document.getElementById(payload.audio_id)
             audio.pause() 
         })
+        this.handleEvent("change_volume", (payload) => {
+            let audio = document.getElementById(`audio-${payload.audio_id}`)
+            let volume_input = document.getElementById(`volume-audio-${payload.audio_id}`)
+            volume_input.value = payload.volume
+            audio.volume = payload.volume
+        })
     }
 }
 
