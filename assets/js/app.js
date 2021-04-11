@@ -35,7 +35,9 @@ Hooks.AudioControl = {
             let audio_music_elements = document.querySelectorAll('div.music')
             if (audio_parent.classList.contains('music')) {                
                 audio_music_elements.forEach(function(el) {
-                    el.firstElementChild.pause()
+                    if (!el.firstElementChild.paused) {
+                        el.firstElementChild.pause()
+                    }
                     if (!el.classList.contains('pausable')) {
                         el.firstElementChild.currentTime = 0
                     }                    
