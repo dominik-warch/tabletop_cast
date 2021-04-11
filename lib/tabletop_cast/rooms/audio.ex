@@ -9,7 +9,7 @@ defmodule TabletopCast.Rooms.Audio do
     field :pausable, :boolean, default: false
     field :name, :string
     field :src, :string
-    field :volume, :float, default: 1.0
+    field :volume, :float, default: 0.5
     field :num, :integer
     field :music, :boolean, default: false
     field :ambience, :boolean, default: false
