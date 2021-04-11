@@ -19,20 +19,16 @@
         </div>
         <div class="roomlink">
          	<%= link to: Routes.show_path(@conn, :show, room.slug) do %>
-            <%= room.slug %>
+            <%= room.slug %> <svg class="ricon"><use xlink:href="#cast"/></svg>
           <% end %>
         </div>
 
         <div class="roomcontrol">
           <%= link to: Routes.room_path(@conn, :show, room), class: "roomshow rbutton" do %>
-            <svg class="ricon"><use xlink:href="#eye"/></svg>
+            <svg class="ricon"><use xlink:href="#edit"/></svg>
           <% end %>
 
-          <%= link to: Routes.room_path(@conn, :edit, room), class: "roomedit rbutton" do %>
-           	<svg class="ricon"><use xlink:href="#edit"/></svg>
-          <% end %>
-
-          <%= link to: Routes.room_path(@conn, :delete, room), method: :delete, data: [confirm: "Are you sure?"], class: "roomdelete rbutton" do %>
+          <%= link to: Routes.room_path(@conn, :delete, room), method: :delete, data: [confirm: "Diesen Raum unwiderruflich löschen?"], class: "roomdelete rbutton" do %>
            	<svg class="ricon"><use xlink:href="#trash-2"/></svg>
           <% end %>
         </div>

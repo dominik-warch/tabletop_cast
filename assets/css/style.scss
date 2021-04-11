@@ -78,6 +78,10 @@ audio {
 	.button {
 		height: 35px;
 		padding: 10px 15px;
+		&.admin {
+			width: auto;
+			margin-right: 10px;
+		}
 		&.user {
 			width: auto;
 			margin-right: 10px;
@@ -88,9 +92,9 @@ audio {
 	}
 }
 
-#gm {
-	#soundpad {
-		display: none;
+.gm {
+	.admin {
+		display: none !important;
 	}
 }
 

@@ -12,9 +12,9 @@
     <!-- Usercount -->
 
     <div id="usercount">
-        <%= link to: Routes.room_path(@socket, :show, @room.id), class: "button user" do %>
-            Admin
-        <% end %>
+		<%= link to: Routes.room_path(@socket, :show, @room.id), class: "button admin" do %>
+					Admin
+			<% end %>
     	<div class="button user">Nutzer:</div>
         <div class="button usernumber"><%= Enum.count(@connected_users) %></div> <!-- shows number of live users -->
     </div>
@@ -42,7 +42,7 @@
 
     <!-- SoundPad -->
 
-    <div id="soundpad">
+    <div id="soundpad" class="admin">
         <div class="row">
 
           <%= for audio <- @room.audios do %>
@@ -103,8 +103,7 @@
                             </form>
 
                             <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
-							<div class="loopbox">
-                                <span class="loop"></span>
+														<div class="loopbox">
                                 <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
                             </div>
                         </div>
