@@ -38,7 +38,7 @@ defmodule TabletopCastWeb.RoomController do
         Rooms.create_audio(%{room_id: room.id, num: 19})
         Rooms.create_audio(%{room_id: room.id, num: 20})
         Rooms.create_audio(%{room_id: room.id, num: 21})
-        File.mkdir("/home/deploy/media/#{room.slug}")
+        File.mkdir("/home/deploy/media/#{room.id}")
 
         conn
         |> put_flash(:info, "Raum erfolgreich angelegt.")

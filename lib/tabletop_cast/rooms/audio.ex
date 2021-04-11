@@ -22,7 +22,7 @@ defmodule TabletopCast.Rooms.Audio do
   @doc false
   def changeset(audio, attrs) do
     audio
-    |> cast(attrs, [:name, :src, :volume, :loop, :room_id, :num, :pausable])
+    |> cast(attrs, [:name, :src, :volume, :loop, :room_id, :num, :pausable, :music, :ambience, :fade])
     |> validate_required([:room_id, :num])
     |> assoc_constraint(:room)
   end
