@@ -306,13 +306,13 @@ input[type=range]::-moz-range-thumb {
 	fill: none;
 }
 
-.loopbox:hover input ~ .loopicon {
-	stroke: rgba(255,255,255,1);
-}
-
-.loopbox input:checked ~ .loopicon {
+.field.loop_active .loopicon {
 	color: rgba(0, 200, 0, 0.5);
 	stroke: rgba(0, 200, 0, 0.5);
+}
+
+.loopbox:hover .loopicon {
+	stroke: rgba(255,255,255,1);
 }
 
 
@@ -524,4 +524,3 @@ form {
 .alert:empty {
   display: none;
 }
-

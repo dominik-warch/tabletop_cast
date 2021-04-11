@@ -61,12 +61,12 @@
           <%= for audio <- @room.audios do %>
 
         	<!-- FIELD -->
-            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %>">
+            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %> <%= if audio.loop do %>loop_active<% end %>">
 
             	<!-- Audio-Tag: is always hidden! -->
             	<audio
                     id='audio-<%= audio.num %>'
-                    <%= if audio.loop do %>loop<% end %>
+                    <%= if audio.loop do %>loop="true"<% else %> <% end %>
                     controls
                     src='<%= audio.src %>'
                     onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
@@ -111,14 +111,7 @@
 
                             <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
                             <div class="loopbox">
-                                <input type="checkbox"
-                                    id="loop-audio-<%= audio.num %>"
-                                    class="loop"
-                                    name="loop"
-                                    onchange="if(this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop){this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=false;}else{this.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.loop=true;}"
-                                />
-                                    <!-- Checkbox is hidden -->
-
+                                <span class="loop"></span>
                                 <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
                             </div>
                         </div>
