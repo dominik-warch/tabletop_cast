@@ -19,15 +19,34 @@ import {LiveSocket} from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
+function playAudio(audio, audio_num) {
+    document.getElementById(audio_num).classList.add('play')
+    document.getElementById(audio_num).classList.remove('stop')
+    audio.play()
+}
+
 let Hooks = {}
 Hooks.AudioControl = {
     mounted() {
         this.handleEvent("play_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
+            let audio_parent = audio.parentElement
             let audio_num = payload.audio_id.slice(6)
-            document.getElementById(audio_num).classList.add('play')
-            document.getElementById(audio_num).classList.remove('stop')
-            audio.play()
+            let audio_music_elements = document.querySelectorAll('div.music')
+            if (audio_parent.classList.contains('music')) {                
+                audio_music_elements.forEach(function(el) {
+                    el.firstElementChild.pause()
+                    if (!el.classList.contains('pausable')) {
+                        el.firstElementChild.currentTime = 0
+                    }                    
+                    el.classList.add('stop')
+                    el.classList.remove('play')
+                })
+                playAudio(audio, audio_num)             
+            } else {
+                playAudio(audio, audio_num)
+            }
+            
         })
         this.handleEvent("stop_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
