@@ -11,6 +11,9 @@ defmodule TabletopCast.Rooms.Audio do
     field :src, :string
     field :volume, :float, default: 1.0
     field :num, :integer
+    field :music, :boolean, default: false
+    field :ambience, :boolean, default: false
+    field :fade, :boolean, default: false
     belongs_to(:room, Room)
 
     timestamps()

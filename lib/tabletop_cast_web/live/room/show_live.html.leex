@@ -12,6 +12,9 @@
     <!-- Usercount -->
 
     <div id="usercount">
+        <%= link to: Routes.room_path(@socket, :show, @room.id), class: "button user" do %>
+            Admin
+        <% end %>
     	<div class="button user">Nutzer:</div>
         <div class="button usernumber"><%= Enum.count(@connected_users) %></div> <!-- shows number of live users -->
     </div>
@@ -20,22 +23,6 @@
 
     <div id="main-controls">
         <div class="row">
-        	<!-- BUTTON: Stop all --
-            <a class="button stop" href="#">
-                <svg class="icon"><use xlink:href="#pause"/></svg>
-            </a>
-
-            <!-- BUTTON: Mute all --
-            <a class="button unmute" href="#">
-                <svg class="icon"><use xlink:href="#volume-x"/></svg>
-            </a>
-
-            <!-- BUTTON: Unmute all --
-            <a class="button mute" href="#">
-                <svg class="icon"><use xlink:href="#volume-2"/></svg>
-            </a>
-
-			<!-- BUTTON: GM -->
             <a class="button stop" href="#" onclick="document.getElementById('site').classList.toggle('gm')">
                 <svg class="icon"><use xlink:href="#edit"/></svg>
             </a>
@@ -43,7 +30,7 @@
             <!-- FIELD: Switch to Room ID -->
             <div class="jumptoroom">
             	<input type="text" id="jumptoroom" class="jumptoroom" name="jumptoroom" value="<%= @room.title %>" />
-            	<a class="button jumptoroom" href="#" onclick="parent.location = getElementById('jumptoroom').value +'.html' ">
+            	<a class="button jumptoroom" href="#">
                 	<svg class="icon"><use xlink:href="#skip-forward"/></svg>
             	</a>
             </div>
@@ -61,12 +48,12 @@
           <%= for audio <- @room.audios do %>
 
         	<!-- FIELD -->
-            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %> <%= if audio.loop do %>loop_active<% end %>">
+            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %> <%= if audio.loop do %>loop_active<% end %> <%= if audio.music do %>music<% end %> <%= if audio.ambience do %>ambience<% end %> <%= if audio.fade do %>fade<% end %>">
 
             	<!-- Audio-Tag: is always hidden! -->
             	<audio
                     id='audio-<%= audio.num %>'
-                    <%= if audio.loop do %>loop="true"<% else %> <% end %>
+                    <%= if audio.loop do %>loop<% end %>
                     controls
                     src='<%= audio.src %>'
                     onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
@@ -79,15 +66,21 @@
                     <div id="audio-<%= audio.num %>-playpause" class="playpause">
                         <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="AudioControl"
                         >
-                        	<svg class="icon"><use xlink:href="#play"/></svg>
+													<svg class="icon normal"><use href="#play"/></svg>
+													<svg class="icon music"><use href="#music"/></svg>
+													<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
                         <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="AudioControl"
                         >
-                        	<svg class="icon"><use xlink:href="#x-square"/></svg>
+													<svg class="icon normal"><use href="#x-square"/></svg>
+													<svg class="icon music"><use href="#music"/></svg>
+													<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
                         <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="AudioControl"
                         >
-                        	<svg class="icon"><use xlink:href="#pause"/></svg>
+													<svg class="icon normal"><use href="#pause"/></svg>
+													<svg class="icon music"><use href="#music"/></svg>
+													<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
                     </div>
                     <div class="titlevolume">
@@ -110,13 +103,14 @@
                             </form>
 
                             <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
-                            <div class="loopbox">
+							<div class="loopbox">
                                 <span class="loop"></span>
                                 <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
                             </div>
                         </div>
                     </div>
                 </div>
+								<div class="progress" id="progress"></div>
                 <!-- /Audio Controls -->
             </div>
             <!-- /FIELD !-->
