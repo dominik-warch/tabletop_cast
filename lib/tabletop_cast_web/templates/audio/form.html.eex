@@ -34,6 +34,16 @@
 </div>
 
 <div class="inputset">
+  <%= label f, :music, "Musik" %>
+  <%= checkbox f, :music %>
+  <%= error_tag f, :music %>
+
+  <%= label f, :ambience, "Ambience" %>
+  <%= checkbox f, :ambience %>
+  <%= error_tag f, :ambience %>
+</div>
+
+<div class="inputset">
   <%= label f, :audio_file, "Audiodatei hochladen" %>
   <%= file_input f, :audio_file %>
 </div>
