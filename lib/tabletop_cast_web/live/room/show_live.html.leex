@@ -55,6 +55,7 @@
                     id='audio-<%= audio.num %>'
                     <%= if audio.loop do %>loop<% end %>
                     controls
+                    preload="auto"
                     src='<%= audio.src %>'
                     onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
                 </audio>
