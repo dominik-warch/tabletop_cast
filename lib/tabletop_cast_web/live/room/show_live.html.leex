@@ -50,7 +50,16 @@
           <%= for audio <- @room.audios do %>
 
         	<!-- FIELD -->
-            <div id="<%= audio.num %>" phx-hook="SetVolume" class="field stop <%= if audio.pausable do %>pausable<% end %> <%= if audio.loop do %>loop_active<% end %> <%= if audio.music do %>music<% end %> <%= if audio.ambience do %>ambience<% end %> <%= if audio.fade do %>fade<% end %>">
+            <div
+                id="<%= audio.num %>"
+                phx-hook="SetVolume"
+                class="field stop
+                    <%= if audio.pausable do %>pausable<% end %>
+                    <%= if audio.loop do %>loop_active<% end %>
+                    <%= if audio.music do %>music<% end %>
+                    <%= if audio.ambience do %>ambience<% end %>
+                    <%= if audio.fade do %>fade<% end %>
+                    <%= if !audio.src do %>dead<% end %>">
 
             	<!-- Audio-Tag: is always hidden! -->
             	<audio
