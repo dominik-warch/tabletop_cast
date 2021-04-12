@@ -1,5 +1,3 @@
-
-
 <div id ="site" class="gm">
 
 	<!-- header -->
@@ -25,6 +23,10 @@
         <div class="row">
             <a class="button stop" href="#" onclick="document.getElementById('site').classList.toggle('gm')">
                 <svg class="icon"><use xlink:href="#edit"/></svg>
+            </a>
+
+            <a class="button stop" href="#" id="stop-all-audio" phx-click="StopAllAudio" phx-hook="StopAllAudio">
+                <svg class="icon"><use xlink:href="#pause"/></svg>
             </a>
 
             <!-- FIELD: Switch to Room ID -->
@@ -67,21 +69,21 @@
                     <div id="audio-<%= audio.num %>-playpause" class="playpause">
                         <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="PlayControl_<%= audio.num %>"
                         >
-													<svg class="icon normal"><use href="#play"/></svg>
-													<svg class="icon music"><use href="#music"/></svg>
-													<svg class="icon ambience"><use href="#image"/></svg>
+							<svg class="icon normal"><use href="#play"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
-                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="AudioControl"
+                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="StopControl_<%= audio.num %>"
                         >
-													<svg class="icon normal"><use href="#x-square"/></svg>
-													<svg class="icon music"><use href="#music"/></svg>
-													<svg class="icon ambience"><use href="#image"/></svg>
+							<svg class="icon normal"><use href="#x-square"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
-                        <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="AudioControl"
+                        <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="PauseControl_<%= audio.num %>"
                         >
-													<svg class="icon normal"><use href="#pause"/></svg>
-													<svg class="icon music"><use href="#music"/></svg>
-													<svg class="icon ambience"><use href="#image"/></svg>
+							<svg class="icon normal"><use href="#pause"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
                         </a>
                     </div>
                     <div class="titlevolume">

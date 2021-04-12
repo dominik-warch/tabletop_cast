@@ -19,35 +19,46 @@ import {LiveSocket} from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
-function playAudio(audio, audio_num) {
-    document.getElementById(audio_num).classList.add('play')
-    document.getElementById(audio_num).classList.remove('stop')
+// Helper functions
+function playAudio(audio) {
     audio.play()
 }
 
+function stopOrPauseAudio(audio) {
+    audio.pause()
+    if (!audio.parentElement.classList.contains('pausable')) {
+        audio.currentTime = 0
+    } 
+}
+
+function togglePlayStop(audioField) {
+    audioField.classList.toggle('stop')
+    audioField.classList.toggle('play')
+}
+
 function playStopAudio(payload) {
-    console.log("Play-Event fired")
     let audio = document.getElementById(payload.audio_id)
-    let audio_parent = audio.parentElement
-    let audio_num = payload.audio_id.slice(6)
-    let audio_music_elements = document.querySelectorAll('div.music')
-    if (audio_parent.classList.contains('music')) {                
-        audio_music_elements.forEach(function(el) {
-            if (!el.firstElementChild.paused) {
-                el.firstElementChild.pause()
+    let audioField = document.getElementById(payload.audio_id.slice(6))
+    let audioFieldElements = document.querySelectorAll('div.music')
+    if (audioField.classList.contains('music')) {                
+        audioFieldElements.forEach(function(audioField) {
+            let audio = audioField.firstElementChild
+
+            if (!audio.paused) {
+                togglePlayStop(audioField)
+                stopOrPauseAudio(audio)
             }
-            if (!el.classList.contains('pausable')) {
-                el.firstElementChild.currentTime = 0
-            }                    
-            el.classList.add('stop')
-            el.classList.remove('play')
         })
-        playAudio(audio, audio_num)             
+        togglePlayStop(audioField)
+        playAudio(audio)             
     } else {
-        playAudio(audio, audio_num)
+        togglePlayStop(audioField)
+        playAudio(audio)
     }
 }
 
+
+// Register Hooks
 let Hooks = {}
 
 for (let i = 0; i <= 21; i++) {
@@ -60,23 +71,50 @@ for (let i = 0; i <= 21; i++) {
     }
 }
 
+for (let i = 0; i <= 21; i++) {
+    Hooks[`StopControl_${i}`] = {
+        mounted() {
+            this.handleEvent(`stop_audio-${this.el.id.slice(11)}`, (payload) => {
+                let audio = document.getElementById(payload.audio_id)
+                let audioField = document.getElementById(payload.audio_id.slice(6))
+                stopOrPauseAudio(audio)
+                togglePlayStop(audioField)
+            })
+        }
+    }
+}
+
+for (let i = 0; i <= 21; i++) {
+    Hooks[`PauseControl_${i}`] = {
+        mounted() {
+            this.handleEvent(`pause_audio-${this.el.id.slice(12)}`, (payload) => {
+                let audio = document.getElementById(payload.audio_id)
+                let audioField = document.getElementById(payload.audio_id.slice(6))
+                stopOrPauseAudio(audio)
+                togglePlayStop(audioField)
+            })
+        }
+    }
+}
+
+Hooks.StopAllAudio = {
+    mounted() {
+        this.handleEvent("stop_all_audio", (payload) => {
+            let audioElements = document.querySelectorAll('audio')
+            audioElements.forEach(function(audio) {
+                let audioField = audio.parentElement
+                if (!audio.paused) {
+                    togglePlayStop(audioField)
+                    stopOrPauseAudio(audio)
+                }
+            })
+        })
+    }
+}
+
+// Todo
 Hooks.AudioControl = {
     mounted() {
-        this.handleEvent("stop_audio", (payload) => {
-            let audio = document.getElementById(payload.audio_id)
-            let audio_num = payload.audio_id.slice(6)
-            document.getElementById(audio_num).classList.add('stop');
-            document.getElementById(audio_num).classList.remove('play');
-            audio.pause()
-            audio.currentTime = 0
-        })
-        this.handleEvent("pause_audio", (payload) => {
-            let audio = document.getElementById(payload.audio_id)
-            let audio_num = payload.audio_id.slice(6)
-            document.getElementById(audio_num).classList.add('stop');
-            document.getElementById(audio_num).classList.remove('play');
-            audio.pause() 
-        })
         this.handleEvent("change_volume", (payload) => {
             let audio = document.getElementById(`audio-${payload.audio_id}`)
             let volume_input = document.getElementById(`volume-audio-${payload.audio_id}`)
