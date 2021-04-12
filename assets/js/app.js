@@ -50,81 +50,69 @@ function playStopAudio(payload) {
 
 let Hooks = {}
 
-Hooks.PlayControl1 = {
+Hooks.PlayControl = {
     mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-1", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl2 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-2", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl3 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-3", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl4 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-4", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl5 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-5", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl6 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-6", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl7 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-7", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl8 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-8", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl9 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-9", (payload) => {
             playStopAudio(payload)            
         })
-    }
-}
-
-Hooks.PlayControl10 = {
-    mounted() {
-        this.handleEvent("play_audio", (payload) => {
+        this.handleEvent("play_audio-10", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-11", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-12", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-13", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-14", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-15", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-16", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-17", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-18", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-19", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-20", (payload) => {
+            playStopAudio(payload)            
+        })
+        this.handleEvent("play_audio-21", (payload) => {
             playStopAudio(payload)            
         })
     }

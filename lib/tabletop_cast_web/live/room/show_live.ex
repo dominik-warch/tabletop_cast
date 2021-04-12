@@ -43,7 +43,7 @@ defmodule TabletopCastWeb.Room.ShowLive do
   end
 
   def handle_info({:audio_played, message}, socket) do
-    {:noreply, push_event(socket, "play_audio", %{audio_id: message})}
+    {:noreply, push_event(socket, "play_#{message}", %{audio_id: message})}
   end
 
   def handle_info({:audio_stopped, message}, socket) do
