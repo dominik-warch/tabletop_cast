@@ -43,9 +43,22 @@
   <%= error_tag f, :ambience %>
 </div>
 
-<div class="inputset">
+<div class="inputset file">
   <%= label f, :audio_file, "Audiodatei hochladen" %>
   <%= file_input f, :audio_file %>
+  <div class="dragndrop_field">
+    <div class="dragndrop">
+      Datei hier ablegen
+    </div>
+  </div>
+</div>
+
+<div class="inputset upload">
+  <div class="uploadbar">
+    <div class="uploadprogress">
+      --PERCENT--%
+    </div>
+  </div>
 </div>
 
 <div class="row">
