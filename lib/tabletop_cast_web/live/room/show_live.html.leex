@@ -13,8 +13,7 @@
 		<%= link to: Routes.room_path(@socket, :show, @room.id), class: "button admin" do %>
 					Admin
 			<% end %>
-    	<div class="button user">Nutzer:</div>
-        <div class="button usernumber"><%= Enum.count(@connected_users) %></div> <!-- shows number of live users -->
+    	<div class="button usernumber"><svg class="icon"><use href="#users"></use></svg><div class="number"><%= Enum.count(@connected_users) %></div></div>
     </div>
 
     <!-- Main Controls -->
@@ -42,9 +41,19 @@
 
     <!-- /Main Controls -->
 
-    <!-- SoundPad -->
+    <!-- SoundPads -->
 
-    <div id="soundpad" class="admin">
+<div id="wrapper" class="admin">
+  <input class="radio" id="one" name="group" type="radio" checked>
+  <input class="radio" id="two" name="group" type="radio">
+  <input class="radio" id="three" name="group" type="radio">
+  <div class="tabs">
+    <label class="button" id="one-tab" for="one">1</label>
+    <label class="button" id="two-tab" for="two">2</label>
+    <label class="button" id="three-tab" for="three">3</label>
+  </div>
+  <div class="pads">
+    <div class="soundpad" id="one-pad">
         <div class="row">
 
           <%= for audio <- @room.audios, audio.num <= 27 do %>
@@ -129,7 +138,7 @@
         </div>
     </div>
 
-    <div id="soundpad" class="admin">
+    <div class="soundpad" id="two-pad">
         <div class="row">
 
           <%= for audio <- @room.audios, audio.num > 27 && audio.num <= 54 do %>
@@ -214,7 +223,7 @@
         </div>
     </div>
 
-    <div id="soundpad" class="admin">
+    <div class="soundpad" id="three-pad">
         <div class="row">
 
           <%= for audio <- @room.audios, audio.num > 54 do %>

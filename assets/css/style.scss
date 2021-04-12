@@ -77,17 +77,31 @@ audio {
 	@include flex(row, nowrap, center);
 	.button {
 		height: 35px;
-		padding: 10px 15px;
+    padding: 10px 0px;
+    width: 65px;
 		&.admin {
 			width: auto;
 			margin-right: 10px;
+			padding: 10px;
 		}
 		&.user {
 			width: auto;
 			margin-right: 10px;
 		}
 		&.usernumber {
-
+			.icon {
+				width: 30px;
+		    height: 25px;
+		    display: inline-block;
+		    margin-top: -8px;
+		    margin-bottom: -8px;
+		    margin-left: -6px;
+		    margin-right: -8px;
+			}
+			.number {
+		    display: inline-block;
+		    margin-left: 15px;
+			}
 		}
 	}
 }
@@ -98,7 +112,7 @@ audio {
 	}
 }
 
-#soundpad {
+.soundpad {
 	padding: 10px 0px 0px 10px;
 	margin: 0px auto;
 	width: 100%;
@@ -591,4 +605,66 @@ form {
 	&:empty {
 	  display: none;
 	}
+}
+
+/* Soundpad-Wrapper*/
+
+.warpper{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	margin: 10px 0px 0px 10px;
+}
+
+.tabs .button{
+	display: block;
+	position: relative;
+	width: 70px;
+	height: 25px;
+	line-height: 25px;
+	background-color: $button;
+	border-radius: 3px;
+	text-align: center;
+	color: $text;
+	padding-top: 0px;
+	margin: 0px 5px;
+	border: 0px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.pads{
+
+}
+.soundpad{
+  display:none;
+  animation: fadein .5s;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.radio{
+  display:none;
+}
+#one:checked ~ .pads #one-pad,
+#two:checked ~ .pads #two-pad,
+#three:checked ~ .pads #three-pad{
+  display:block
+}
+#one:checked ~ .tabs #one-tab,
+#two:checked ~ .tabs #two-tab,
+#three:checked ~ .tabs #three-tab{
+  background: $base;
+  color:white;
 }
