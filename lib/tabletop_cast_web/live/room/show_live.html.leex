@@ -7,33 +7,22 @@
     	<h2><%= @room.title %></h2> <!-- Show Room ID -->
     </div>
 
-    <!-- Usercount -->
-
-    <div id="usercount">
-		<%= link to: Routes.room_path(@socket, :show, @room.id), class: "button admin" do %>
-					Admin
-			<% end %>
-    	<div class="button usernumber"><svg class="icon"><use href="#users"></use></svg><div class="number"><%= Enum.count(@connected_users) %></div></div>
-    </div>
-
     <!-- Main Controls -->
 
     <div id="main-controls">
         <div class="row">
-            <a class="button stop" href="#" onclick="document.getElementById('site').classList.toggle('gm')">
-                <svg class="icon"><use xlink:href="#edit"/></svg>
+            <a class="button gmtoggle" href="#" onclick="document.getElementById('site').classList.toggle('gm')">
+                <svg class="icon"><use xlink:href="#grid"/></svg>
             </a>
 
-            <a class="button stop" href="#" id="stop-all-audio" phx-click="StopAllAudio" phx-hook="StopAllAudio">
-                <svg class="icon"><use xlink:href="#pause"/></svg>
+            <a class="button stop admin" href="#" id="stop-all-audio" phx-click="StopAllAudio" phx-hook="StopAllAudio">
+                <svg class="icon"><use xlink:href="#x-octagon"/></svg>
             </a>
-
-            <!-- FIELD: Switch to Room ID -->
-            <div class="jumptoroom">
-            	<input type="text" id="jumptoroom" class="jumptoroom" name="jumptoroom" value="<%= @room.title %>" />
-            	<a class="button jumptoroom" href="#">
-                	<svg class="icon"><use xlink:href="#skip-forward"/></svg>
-            	</a>
+            <div id="usercount">
+        		<%= link to: Routes.room_path(@socket, :show, @room.id), class: "button admin" do %>
+        					Admin
+        			<% end %>
+            	<div class="button usernumber"><svg class="icon"><use href="#users"></use></svg><div class="number"><%= Enum.count(@connected_users) %></div></div>
             </div>
 
         </div>

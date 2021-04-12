@@ -106,9 +106,16 @@ audio {
 	}
 }
 
+.button.gmtoggle {
+	background-color: $base;
+}
+
 .gm {
 	.admin {
 		display: none !important;
+	}
+	.button.gmtoggle {
+		background-color: $button;
 	}
 }
 
@@ -124,6 +131,13 @@ audio {
 	border-bottom: 1px solid $text;
 	.row>*{
 		margin: 0px 5px 10px 5px;
+	}
+	.button {
+		height: 35px;
+		.icon {
+			width: 27px;
+			height: 35px;
+		}
 	}
 }
 
@@ -511,6 +525,27 @@ input[type=range] {
 		white-space: nowrap;
     overflow: hidden;
 		text-overflow: ellipsis;
+	}
+	&:nth-child(27n) {
+    margin-bottom: 20px;
+	}
+	&:nth-child(1):before {
+		content: "Seite 1";
+	}
+	&:nth-child(28):before {
+		content: "Seite 2";
+	}
+	&:nth-child(55):before {
+		content: "Seite 3";
+	}
+	&:nth-child(27n+1):before {
+    transform: rotate(-90deg);
+    font-size: 24px;
+    width: 0px;
+    white-space: nowrap;
+    position: relative;
+    top: 50px;
+    left: -15px;
 	}
 }
 
