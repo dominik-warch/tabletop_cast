@@ -57,6 +57,15 @@ function playStopAudio(payload) {
     }
 }
 
+const audioFields = document.querySelectorAll('audio')
+audioFields.forEach(function(audio) {
+    audio.addEventListener("timeupdate", function() {
+        let audioId = audio.id.slice(6)
+        let percentage = (audio.currentTime / audio.duration) * 100
+        document.getElementById(`progress-${audioId}`).style.width = percentage + "%"
+        //document.getElementById(`progress-${audioId}`).animate([{'width':(currentTime +.25)/duration*100+'%'}],1000,'linear');
+    });
+})
 
 // Register Hooks
 let Hooks = {}
