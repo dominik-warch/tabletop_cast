@@ -65,7 +65,7 @@
 
                 	<!-- BUTTON: Play/Pause - Depends on class "stop" and "play" in FIELD -->
                     <div id="audio-<%= audio.num %>-playpause" class="playpause">
-                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="PlayControl"
+                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="PlayControl<%= audio.num %>"
                         >
 													<svg class="icon normal"><use href="#play"/></svg>
 													<svg class="icon music"><use href="#music"/></svg>

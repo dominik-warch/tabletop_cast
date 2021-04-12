@@ -25,31 +25,107 @@ function playAudio(audio, audio_num) {
     audio.play()
 }
 
+function playStopAudio(payload) {
+    console.log("Play-Event fired")
+    let audio = document.getElementById(payload.audio_id)
+    let audio_parent = audio.parentElement
+    let audio_num = payload.audio_id.slice(6)
+    let audio_music_elements = document.querySelectorAll('div.music')
+    if (audio_parent.classList.contains('music')) {                
+        audio_music_elements.forEach(function(el) {
+            if (!el.firstElementChild.paused) {
+                el.firstElementChild.pause()
+            }
+            if (!el.classList.contains('pausable')) {
+                el.firstElementChild.currentTime = 0
+            }                    
+            el.classList.add('stop')
+            el.classList.remove('play')
+        })
+        playAudio(audio, audio_num)             
+    } else {
+        playAudio(audio, audio_num)
+    }
+}
+
 let Hooks = {}
-Hooks.PlayControl = {
+
+Hooks.PlayControl1 = {
     mounted() {
         this.handleEvent("play_audio", (payload) => {
-            console.log("Play-Event fired")
-            let audio = document.getElementById(payload.audio_id)
-            let audio_parent = audio.parentElement
-            let audio_num = payload.audio_id.slice(6)
-            let audio_music_elements = document.querySelectorAll('div.music')
-            if (audio_parent.classList.contains('music')) {                
-                audio_music_elements.forEach(function(el) {
-                    if (!el.firstElementChild.paused) {
-                        el.firstElementChild.pause()
-                    }
-                    if (!el.classList.contains('pausable')) {
-                        el.firstElementChild.currentTime = 0
-                    }                    
-                    el.classList.add('stop')
-                    el.classList.remove('play')
-                })
-                playAudio(audio, audio_num)             
-            } else {
-                playAudio(audio, audio_num)
-            }
-            
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl2 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl3 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl4 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl5 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl6 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl7 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl8 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl9 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
+        })
+    }
+}
+
+Hooks.PlayControl10 = {
+    mounted() {
+        this.handleEvent("play_audio", (payload) => {
+            playStopAudio(payload)            
         })
     }
 }
