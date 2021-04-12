@@ -80,9 +80,9 @@ audio {
     padding: 10px 0px;
     width: 65px;
 		&.admin {
-			width: auto;
-			margin-right: 10px;
-			padding: 10px;
+			width: 50px;
+    	margin-right: 10px;
+    	padding: 0px;
 		}
 		&.user {
 			width: auto;
@@ -127,7 +127,6 @@ audio {
 
 #main-controls {
 	width: 100%;
-	padding-top: 10px;
 	border-bottom: 1px solid $text;
 	.row>*{
 		margin: 0px 5px 10px 5px;
