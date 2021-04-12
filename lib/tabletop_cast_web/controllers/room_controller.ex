@@ -17,7 +17,7 @@ defmodule TabletopCastWeb.RoomController do
   def create(conn, %{"room" => room_params}) do
     case Rooms.create_room(room_params) do
       {:ok, room} ->
-        Enum.each(1..21, fn number ->
+        Enum.each(1..81, fn number ->
           Rooms.create_audio(%{room_id: room.id, num: number})
         end)
         File.mkdir("/home/deploy/media/#{room.id}")

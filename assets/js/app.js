@@ -70,7 +70,7 @@ audioFields.forEach(function(audio) {
 // Register Hooks
 let Hooks = {}
 
-for (let i = 0; i <= 21; i++) {
+for (let i = 0; i <= 81; i++) {
     Hooks[`PlayControl_${i}`] = {
         mounted() {
             this.handleEvent(`play_audio-${this.el.id.slice(11)}`, (payload) => {
@@ -80,7 +80,7 @@ for (let i = 0; i <= 21; i++) {
     }
 }
 
-for (let i = 0; i <= 21; i++) {
+for (let i = 0; i <= 81; i++) {
     Hooks[`StopControl_${i}`] = {
         mounted() {
             this.handleEvent(`stop_audio-${this.el.id.slice(11)}`, (payload) => {
@@ -93,7 +93,7 @@ for (let i = 0; i <= 21; i++) {
     }
 }
 
-for (let i = 0; i <= 21; i++) {
+for (let i = 0; i <= 81; i++) {
     Hooks[`PauseControl_${i}`] = {
         mounted() {
             this.handleEvent(`pause_audio-${this.el.id.slice(12)}`, (payload) => {

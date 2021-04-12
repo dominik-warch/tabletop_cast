@@ -47,7 +47,177 @@
     <div id="soundpad" class="admin">
         <div class="row">
 
-          <%= for audio <- @room.audios do %>
+          <%= for audio <- @room.audios, audio.num <= 27 do %>
+
+        	<!-- FIELD -->
+            <div
+                id="<%= audio.num %>"
+                phx-hook="SetVolume"
+                class="field stop
+                    <%= if audio.pausable do %>pausable<% end %>
+                    <%= if audio.loop do %>loop_active<% end %>
+                    <%= if audio.music do %>music<% end %>
+                    <%= if audio.ambience do %>ambience<% end %>
+                    <%= if audio.fade do %>fade<% end %>
+                    <%= if !audio.src do %>dead<% end %>">
+
+            	<!-- Audio-Tag: is always hidden! -->
+            	<audio
+                    id='audio-<%= audio.num %>'
+                    <%= if audio.loop do %>loop<% end %>
+                    controls
+                    preload="auto"
+                    src='<%= audio.src %>'
+                    onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
+                </audio>
+
+                <!-- Audio Controls -->
+                <div id="audio-<%= audio.num %>-controls" class="controls">
+
+                	<!-- BUTTON: Play/Pause - Depends on class "stop" and "play" in FIELD -->
+                    <div id="audio-<%= audio.num %>-playpause" class="playpause">
+                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="PlayControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#play"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="StopControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#x-square"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                        <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="PauseControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#pause"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                    </div>
+                    <div class="titlevolume">
+
+                        <!-- INPUT: Title - To name Sound -->
+                        <span class="title"><%= audio.name %></span>
+
+                        <div class="volumeloop">
+                            <!-- INPUT: Volume -->
+                            <form phx-change="ChangeVolume">
+                            <input type="range"
+                                id="volume-audio-<%= audio.num %>"
+                                class="volume"
+                                name="<%= audio.num %>"
+                                value='<%= audio.volume %>'
+                                min="0"
+                                max="1"
+                                step="0.01"
+                            />
+                            </form>
+
+                            <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
+														<div class="loopbox">
+                                <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			    <div class="progress" id="progress-<%= audio.num %>"></div>
+                <!-- /Audio Controls -->
+            </div>
+            <!-- /FIELD !-->
+            <% end %>
+        </div>
+    </div>
+
+    <div id="soundpad" class="admin">
+        <div class="row">
+
+          <%= for audio <- @room.audios, audio.num > 27 && audio.num <= 54 do %>
+
+        	<!-- FIELD -->
+            <div
+                id="<%= audio.num %>"
+                phx-hook="SetVolume"
+                class="field stop
+                    <%= if audio.pausable do %>pausable<% end %>
+                    <%= if audio.loop do %>loop_active<% end %>
+                    <%= if audio.music do %>music<% end %>
+                    <%= if audio.ambience do %>ambience<% end %>
+                    <%= if audio.fade do %>fade<% end %>
+                    <%= if !audio.src do %>dead<% end %>">
+
+            	<!-- Audio-Tag: is always hidden! -->
+            	<audio
+                    id='audio-<%= audio.num %>'
+                    <%= if audio.loop do %>loop<% end %>
+                    controls
+                    preload="auto"
+                    src='<%= audio.src %>'
+                    onended="getElementById('<%= audio.num %>').classList.remove('play');getElementById('<%= audio.num %>').classList.add('stop');">
+                </audio>
+
+                <!-- Audio Controls -->
+                <div id="audio-<%= audio.num %>-controls" class="controls">
+
+                	<!-- BUTTON: Play/Pause - Depends on class "stop" and "play" in FIELD -->
+                    <div id="audio-<%= audio.num %>-playpause" class="playpause">
+                        <a phx-value-id="play-audio-<%= audio.num %>" id="play-audio-<%= audio.num %>" phx-click="PlayAudio" class="button play" href="#" phx-hook="PlayControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#play"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                        <a phx-value-id="stop-audio-<%= audio.num %>" id="stop-audio-<%= audio.num %>" phx-click="StopAudio" class="button stop" href="#" phx-hook="StopControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#x-square"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                        <a phx-value-id="pause-audio-<%= audio.num %>" id="pause-audio-<%= audio.num %>" phx-click="PauseAudio" class="button pause" href="#" phx-hook="PauseControl_<%= audio.num %>"
+                        >
+							<svg class="icon normal"><use href="#pause"/></svg>
+							<svg class="icon music"><use href="#music"/></svg>
+							<svg class="icon ambience"><use href="#image"/></svg>
+                        </a>
+                    </div>
+                    <div class="titlevolume">
+
+                        <!-- INPUT: Title - To name Sound -->
+                        <span class="title"><%= audio.name %></span>
+
+                        <div class="volumeloop">
+                            <!-- INPUT: Volume -->
+                            <form phx-change="ChangeVolume">
+                            <input type="range"
+                                id="volume-audio-<%= audio.num %>"
+                                class="volume"
+                                name="<%= audio.num %>"
+                                value='<%= audio.volume %>'
+                                min="0"
+                                max="1"
+                                step="0.01"
+                            />
+                            </form>
+
+                            <!--INPUT: Loop - Hidden checkbox replaced with Icon -->
+														<div class="loopbox">
+                                <svg class="loopicon"><use xlink:href="#repeat"/></svg> <!-- replaces checkbox, styled via css -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			    <div class="progress" id="progress-<%= audio.num %>"></div>
+                <!-- /Audio Controls -->
+            </div>
+            <!-- /FIELD !-->
+            <% end %>
+        </div>
+    </div>
+
+    <div id="soundpad" class="admin">
+        <div class="row">
+
+          <%= for audio <- @room.audios, audio.num > 54 do %>
 
         	<!-- FIELD -->
             <div
