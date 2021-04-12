@@ -26,7 +26,7 @@ function playAudio(audio, audio_num) {
 }
 
 let Hooks = {}
-Hooks.AudioControl = {
+Hooks.PlayControl = {
     mounted() {
         this.handleEvent("play_audio", (payload) => {
             console.log("Play-Event fired")
@@ -51,6 +51,11 @@ Hooks.AudioControl = {
             }
             
         })
+    }
+}
+
+Hooks.AudioControl = {
+    mounted() {
         this.handleEvent("stop_audio", (payload) => {
             let audio = document.getElementById(payload.audio_id)
             let audio_num = payload.audio_id.slice(6)
