@@ -100,7 +100,7 @@
 
                         <div class="volumeloop">
                             <!-- INPUT: Volume -->
-                            <form phx-change="ChangeVolume">
+                            <form phx-change="ChangeVolume" phx-hook="AudioControl">
                             <input type="range"
                                 id="volume-audio-<%= audio.num %>"
                                 class="volume"
