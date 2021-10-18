@@ -20,7 +20,7 @@ defmodule TabletopCast.MixProject do
   def application do
     [
       mod: {TabletopCast.Application, []},
-      extra_applications: [:logger, :runtime_tools, :edeliver]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -47,8 +47,6 @@ defmodule TabletopCast.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:edeliver, ">= 1.6.0"},
-      {:distillery, "~> 2.0", warn_missing: false},
       {:uuid, "~> 1.1"}
     ]
   end
