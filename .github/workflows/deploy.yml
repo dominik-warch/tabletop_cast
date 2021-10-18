@@ -19,7 +19,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: 22
         script: |
-          export PATH="$PATH:/home/dominik/.asdf/shims"
           cd tabletop_cast
           git pull origin main
           mix deps.get --only prod
