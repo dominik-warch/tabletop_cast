@@ -27,8 +27,8 @@ defmodule TabletopCastWeb.AudioController do
     audio_params =
       if upload = audio_params["audio_file"] do
         file_extension = Path.extname(upload.filename)
-        File.cp(upload.path, "/home/deploy/media/#{room.id}/audio-#{audio.num}#{file_extension}")
-        Map.put(audio_params, "src", "http://ttc.dvisca.de/media/#{room.id}/audio-#{audio.num}#{file_extension}")
+        File.cp(upload.path, "/home/dominik/media/#{room.id}/audio-#{audio.num}#{file_extension}")
+        Map.put(audio_params, "src", "https://tabletopcast.de/media/#{room.id}/audio-#{audio.num}#{file_extension}")
       else
         audio_params
       end
