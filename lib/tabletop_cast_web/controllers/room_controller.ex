@@ -20,7 +20,7 @@ defmodule TabletopCastWeb.RoomController do
         Enum.each(1..81, fn number ->
           Rooms.create_audio(%{room_id: room.id, num: number})
         end)
-        File.mkdir("/home/deploy/media/#{room.id}")
+        File.mkdir("/home/dominik/media/#{room.id}")
 
         conn
         |> put_flash(:info, "Raum erfolgreich angelegt.")
@@ -59,7 +59,7 @@ defmodule TabletopCastWeb.RoomController do
   def delete(conn, %{"id" => id}) do
     room = Rooms.get_room!(id)
     {:ok, _room} = Rooms.delete_room(room)
-    File.rm_rf("/home/deploy/media/#{room.slug}")
+    File.rm_rf("/home/dominik/media/#{room.slug}")
 
     conn
     |> put_flash(:info, "Raum erfolgreich gelöscht.")
