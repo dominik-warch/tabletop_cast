@@ -53,14 +53,6 @@
   </div>
 </div>
 
-<div class="inputset upload">
-  <div class="uploadbar">
-    <div class="uploadprogress">
-      --PERCENT--%
-    </div>
-  </div>
-</div>
-
 <div class="row">
   <%= link to: Routes.room_path(@conn, :show, @room), class: "rbutton" do %>
  	  <svg class="ricon"><use xlink:href="#corner-down-left"/></svg> Zurück
