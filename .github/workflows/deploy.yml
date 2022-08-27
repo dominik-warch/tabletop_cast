@@ -29,4 +29,4 @@ jobs:
           npm run deploy --prefix ./assets
           mix phx.digest
           MIX_ENV=prod mix release --overwrite
-          _build/prod/rel/tabletop_cast/bin/tabletop_cast restart
+          _build/prod/rel/tabletop_cast/bin/tabletop_cast start
